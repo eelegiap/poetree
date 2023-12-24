@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="layout-form">
+        <h1 class="page-title">{{ title }}</h1>
+        {% include 'accounts/inc/_social_auth.html' %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-flex align-items-center">
+                <button class="btn btn-main w-50" type="submit">Ввійти</button>
+                <div class="text-center w-50">
+                    <a href="{% url 'sign_up' %}">Немає акаунту?</a>
+                </div>
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            <a href="{% url 'password_reset' %}">Забули пароль?</a>
+        </div>
+    </div>
+{% endblock %}
